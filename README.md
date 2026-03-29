@@ -42,7 +42,6 @@ Expected local files at repository root:
 - `test.csv`
 - `sample_submission.csv`
 
-If you do not have the original task files, see `docs/LINKS.md` and add your task URL there.
 
 ## Common Commands
 Train an OvR LightGBM forward-CV run:
@@ -63,19 +62,6 @@ Evaluate leaderboard proxy on OOF predictions:
   --oof-csv bird_radar/artifacts/proposal/local_run/oof.csv \
   --output-json bird_radar/artifacts/proposal/local_run/lb_proxy.json
 ```
-
-## Publication Notes
-- The repository is cleaned for publishing: transient logs and root-level experiment outputs were moved under `bird_radar/archive`.
-- Large local artifacts and dataset files are ignored via `.gitignore`.
-- Add your public references in `docs/LINKS.md` before publishing.
-- Archived internal notes are in `docs/archive/`.
-
-## Reproducibility and Scope
-This codebase is research-oriented and contains many experimental branches.  
-For GitHub presentation, the recommended entrypoint is:
-- `bird_radar/scripts/train_lgbm_ovr_forward.py`
-- `bird_radar/scripts/eval_lb_proxy_month_holdout.py`
-- `bird_radar/scripts/blend_submissions.py`
 
 ## License
 See `LICENSE`.
