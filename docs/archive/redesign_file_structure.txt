@@ -1,0 +1,14 @@
+bird_radar/
+├── run_redesign.py
+├── redesign_config.yaml
+└── src/
+    └── redesign/
+        ├── __init__.py
+        ├── utils.py
+        ├── features.py
+        ├── dataset.py
+        ├── model.py
+        ├── train.py
+        ├── oof_eval.py
+        ├── blend_optimizer.py
+        └── submit.py

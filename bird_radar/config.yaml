@@ -1,0 +1,5 @@
+data_dir: /Users/sgrisshk/Desktop/AI-task
+cache_dir: artifacts/cache
+default_seq_epochs: 12
+default_seq_num_workers: 0
+submission_sample: /Users/sgrisshk/Desktop/AI-task/sample_submission.csv

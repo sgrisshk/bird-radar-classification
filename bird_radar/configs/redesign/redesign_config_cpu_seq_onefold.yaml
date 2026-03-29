@@ -1,0 +1,72 @@
+seed: 2026
+
+paths:
+  project_root: /Users/sgrisshk/Desktop/AI-task/bird_radar
+  data_dir: /Users/sgrisshk/Desktop/AI-task
+  cache_dir: /Users/sgrisshk/Desktop/AI-task/bird_radar/artifacts/cache
+  output_dir: /Users/sgrisshk/Desktop/AI-task/bird_radar/artifacts/redesign_cpu_seq_onefold
+
+cv:
+  n_splits: 5
+
+debug:
+  overfit_subset: 0
+  overfit_fold: 0
+  overfit_same_val: false
+  max_folds: 1
+
+sequence:
+  seq_len: 128
+  norm_mode: global_robust
+  clip_abs: 20.0
+
+model:
+  mode: seq_only
+  architectures: [tcn_heavy]
+  seeds: [42]
+  pooling: max
+  seq_dropout: 0.05
+  tab_dropout: 0.05
+
+train:
+  device: cpu
+  strict_device: false
+  ablation_mode: full
+  batch_size: 64
+  eval_batch_size: 128
+  epochs: 20
+  patience: 6
+  lr: 0.001
+  weight_decay: 0.000001
+  grad_clip: 1.0
+  amp: false
+  focal_gamma: 1.5
+  domain_loss_weight: 0.0
+  domain_warmup_epochs: 0
+  domain_target_augment: false
+  tta_val_runs: 0
+  tta_test_runs: 0
+  class_specialized_heads: false
+  weak_k: 3
+  weak_finetune_epochs: 0
+  weak_boost: 1.0
+  debug_batch_stats: false
+
+aug:
+  mixup: false
+  mixup_alpha: 0.2
+  time_reverse_prob: 0.0
+  time_crop_min: 1.0
+
+shift:
+  drop_top_feature_pct: 0.0
+
+blend:
+  top_n_exports: 1
+  weight_perturb_std: 0.0
+
+tabular:
+  iterations: 3000
+  depth: 6
+  learning_rate: 0.03
+  l2_leaf_reg: 8.0

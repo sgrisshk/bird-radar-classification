@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+.venv_backup_*/
+.venv_fix*/
+
+# OS / Editor
+.DS_Store
+.idea/
+.vscode/
+
+# Local data (do not publish raw competition files)
+train.csv
+test.csv
+sample_submission.csv
+
+# Large experiment outputs
+bird_radar/artifacts/
+bird_radar/submissions/
+bird_radar/archive/env_backups/
+bird_radar/archive/tool_outputs/
+bird_radar/archive/root_logs/
+bird_radar/archive/root_submissions/
+bird_radar/data/*.parquet
+
+# Optional local generated folders
+catboost_info/
+
+# Logs and temp
+*.log
+*.tmp
+*.bak

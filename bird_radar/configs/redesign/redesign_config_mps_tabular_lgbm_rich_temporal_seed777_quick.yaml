@@ -1,0 +1,27 @@
+experiment_name: tabular_lgbm_rich_temporal_seed777_quick
+seed: 777
+
+data:
+  train_csv: train.csv
+  test_csv: test.csv
+  sample_submission: sample_submission.csv
+  time_col: timestamp_start_radar_utc
+  group_col: observation_id
+
+lgbm:
+  num_leaves: 127
+  learning_rate: 0.03
+  feature_fraction: 0.8
+  bagging_fraction: 0.8
+  bagging_freq: 1
+  min_data_in_leaf: 200
+  lambda_l2: 1.0
+  max_depth: -1
+  n_splits: 5
+  early_stopping_rounds: 200
+  num_boost_round: 5000
+  num_threads: 0
+  feature_drop_pct: 0.0
+  time_weight_mode: fold0_boost
+  fold0_boost: 0.7
+  time_weight_strength: 0.6

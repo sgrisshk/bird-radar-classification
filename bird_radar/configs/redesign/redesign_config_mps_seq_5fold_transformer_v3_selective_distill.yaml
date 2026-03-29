@@ -1,0 +1,108 @@
+seed: 2026
+
+paths:
+  project_root: /Users/sgrisshk/Desktop/AI-task/bird_radar
+  data_dir: /Users/sgrisshk/Desktop/AI-task
+  cache_dir: /Users/sgrisshk/Desktop/AI-task/bird_radar/artifacts/cache
+  output_dir: /Users/sgrisshk/Desktop/AI-task/bird_radar/artifacts/redesign_mps_seq_5fold_transformer_v3_selective_distill
+
+cv:
+  n_splits: 5
+
+debug:
+  overfit_subset: 0
+  overfit_fold: 0
+  overfit_same_val: false
+  max_folds: 5
+
+sequence:
+  seq_len: 128
+  norm_mode: global_robust
+  clip_abs: 20.0
+  keep_raw_channels: [x, y, z, rcs, speed, vertical_speed, accel, curvature, dt]
+  robust_channels: [rcs, speed, accel, dt]
+  log_dt: false
+  dt_eps: 1e-6
+  delta_channels: []
+  delta_clip_abs: 10.0
+  channel_dropout_p: 0.2
+  time_dropout_p: 0.1
+  channel_dropout_candidates: [dt, accel]
+
+model:
+  mode: seq_only
+  seq_branch: transformer_only
+  architectures: [transformer_heavy]
+  seeds: [42]
+  pooling: mean
+  seq_dropout: 0.20
+  tab_dropout: 0.10
+
+train:
+  device: mps
+  strict_device: true
+  ablation_mode: seq_only
+  batch_size: 64
+  eval_batch_size: 128
+  epochs: 40
+  patience: 8
+  lr: 0.0008
+  weight_decay: 0.00003
+  grad_clip: 1.0
+  amp: false
+  focal_gamma: 1.5
+  loss_bce_weight: 0.9
+  loss_focal_weight: 0.1
+  use_pos_weight: true
+  pos_weight_clip_max: 25.0
+  domain_loss_weight: 0.0
+  domain_warmup_epochs: 0
+  domain_target_augment: false
+  tta_val_runs: 0
+  tta_test_runs: 0
+  class_specialized_heads: false
+  weak_k: 3
+  weak_finetune_epochs: 0
+  weak_boost: 1.0
+  use_weighted_sampler: true
+  sampler_clip_min: 0.5
+  sampler_clip_max: 3.0
+  sampler_uniform_mix: 0.2
+  sampler_power: 0.75
+  debug_batch_stats: false
+  report_train_metric: true
+
+aug:
+  mixup: false
+  mixup_alpha: 0.2
+  time_reverse_prob: 0.0
+  time_crop_min: 0.8
+
+distill:
+  enabled: true
+  teacher_oof_csv: /Users/sgrisshk/Desktop/AI-task/bird_radar/artifacts/oof_csv_for_per_class/oof_base_forward_complete.csv
+  teacher_id_col: track_id
+  teacher_cols: [Clutter, Cormorants, Pigeons, Ducks, Geese, Gulls, Birds of Prey, Waders, Songbirds]
+  temperature: 2.0
+  alpha_true: 0.90
+  alpha_soft: 0.10
+  warmup_soft_epochs: 2
+  soft_loss: bce
+  residual_mode: false
+  delta_l2: 0.0
+  selective_conf_enabled: true
+  selective_conf_threshold: 0.80
+  selective_conf_mode: max
+
+shift:
+  drop_top_feature_pct: 0.0
+
+blend:
+  top_n_exports: 1
+  weight_perturb_std: 0.0
+
+tabular:
+  iterations: 3000
+  depth: 6
+  learning_rate: 0.03
+  l2_leaf_reg: 8.0
